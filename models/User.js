@@ -36,6 +36,12 @@ const UserSchema = Schema(
         },
         standingTime: {
             type: String
+        },
+        routine: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            trim: true,
+            ref: "Routine"
         }
     }
 )

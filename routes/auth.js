@@ -38,3 +38,5 @@ router.post("/login", async (req, res) => {
 })
 
 //user get routines
+
+module.exports = router;

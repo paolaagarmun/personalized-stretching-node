@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 const app = express();
 
 
 //connect to db
-mongoose.connect('mongodb://localhost/personalizedStretching')
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log("Connected to db..."))
     .catch(() => console.log("Couldn't connect to db..."))
 
@@ -23,10 +25,10 @@ app.use(cors());
 //app routes
 app.use("/api/v1/exercises", require('./routes/exercise'));
 app.use("/api/v1/routines", require("./routes/routine"));
-// app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/auth", require("./routes/auth"));
 
 
 
 //set up PORT
-const port = 5000;
+const port = process.env.PORT ;
 app.listen(port,() => console.log('Server is running...'));

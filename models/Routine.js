@@ -7,9 +7,18 @@ const RoutineSchema = Schema({
        trim: true,
        ref: "User"
     },
-    exercise: {
+    exercise1: {
         type: Schema.Types.ObjectId,
-        required: true,
+        trim: true,
+        ref: "Exercise"
+    },
+    exercise2: {
+        type: Schema.Types.ObjectId,
+        trim: true,
+        ref: "Exercise"
+    },
+    exercise3: {
+        type: Schema.Types.ObjectId,
         trim: true,
         ref: "Exercise"
     },
