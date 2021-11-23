@@ -1,7 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 
+
+//connect to db
+mongoose.connect('mongodb://localhost/personalizedStretching')
+    .then(() => console.log("Connected to db..."))
+    .catch(() => console.log("Couldn't connect to db..."))
 
 //first route
 app.get('/', (request, response) => {
