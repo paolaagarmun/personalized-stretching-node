@@ -26,9 +26,11 @@ app.use(cors());
 app.use("/api/v1/exercises", require('./routes/exercise'));
 app.use("/api/v1/routines", require("./routes/routine"));
 app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/users", require("./routes/user"))
 
 
 
 //set up PORT
 const port = process.env.PORT ;
 app.listen(port,() => console.log('Server is running...'));
+

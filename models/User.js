@@ -39,11 +39,14 @@ const UserSchema = Schema(
         },
         routine: {
             type: Schema.Types.ObjectId,
-            required: true,
             trim: true,
             ref: "Routine"
         }
     }
 )
+
+// UserSchema.methods.toJSON = function() {
+//     const {password, __v, ...user} = this.to
+// }
 
 module.exports = model("User", UserSchema);
