@@ -21,12 +21,34 @@ router.get("/", async (req, res) => {
 //get one user (for user view)
 router.get("/user/:id", async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id).populate("routine")
+    const user = await User.findById(id)
+        .populate({
+            path: "routine",
+            populate: {
+                path: "exercise1",
+            }
+        }).populate({
+            path: "routine",
+            populate: {
+                path: "exercise2",
+            }
+        });
     try {
         return res.status(200).json(user)
     }
     catch (error) {
         return res.status(500).json({message: "Couldn't get the coffee"})
+    }
+})
+
+//PUT update user
+router.put("/user/:id", async (req,res) => {
+    const {id} = req.params;
+    const userToUpdate = await User.findByIdAndUpdate(id, req.body, {new:true});
+    try {
+        return res.status(202).json(userToUpdate)
+    } catch {
+        return res.status(500).json({message: "Couldn't update the user"})
     }
 })
 
