@@ -32,6 +32,16 @@ router.get("/user/:id", async (req, res) => {
             populate: {
                 path: "exercise2",
             }
+        }).populate({
+            path: "routine",
+            populate: {
+                path: "exercise3"
+            }
+        }).populate({
+            path: "routine",
+            populate: {
+                path: "notes"
+            }
         });
     try {
         return res.status(200).json(user)
