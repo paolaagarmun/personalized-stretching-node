@@ -28,6 +28,17 @@ router.get("/", async (req, res) => {
     }
 });
 
+//get one exercise
+router.get("/exercise/:id", async (req,res) => {
+    const { id } = req.params;
+    const singleExercise = await Exercise.findById(id);
+    try {
+        return res.status(200).json(singleExercise)
+    } catch (error) {
+        return res.status(500).json({message: "Couldn't retrieve exercise"})
+    }
+})
+
 //edit one exercise
 router.put("/exercise/:id", async (req,res) => {
     const {id} = req.params;
