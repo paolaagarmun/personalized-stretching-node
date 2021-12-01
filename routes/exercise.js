@@ -43,8 +43,6 @@ router.get("/exercise/:id", async (req,res) => {
 router.post("/exercise/imageUpload/:id", async (req, res) => {
     const { id } = req.params;
     const exerciseToUpdate = await Exercise.findById(id);
-    console.log("HERE", exerciseToUpdate)
-
     //check pre existing images
     if (exerciseToUpdate.image) {
         let array = exerciseToUpdate.image.split('/');
