@@ -40,7 +40,7 @@ router.get("/exercise/:id", async (req,res) => {
     }
 })
 //post image
-router.post("exercise/imageUpload/:id", async (req, res) => {
+router.post("/exercise/imageUpload/:id", async (req, res) => {
     const { id } = req.params;
     const exerciseToUpdate = await Exercise.findById(id);
     console.log("HERE", exerciseToUpdate)

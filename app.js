@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload')
 
 require('dotenv').config();
 
@@ -15,6 +16,11 @@ mongoose.connect(process.env.MONGODB_URL)
 //middleware connections
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp',
+    createParentPath:true
+}))
 
 //routes
 //test route
