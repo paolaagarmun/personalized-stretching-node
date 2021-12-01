@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const cloudinary = require('cloudinary').v2;
 
 const Exercise = require('../models/Exercise');
 
@@ -38,6 +39,30 @@ router.get("/exercise/:id", async (req,res) => {
         return res.status(500).json({message: "Couldn't retrieve exercise"})
     }
 })
+//post image
+router.post("exercise/imageUpload/:id", async (req, res) => {
+    const { id } = req.params;
+    const exerciseToUpdate = await Exercise.findById(id);
+    console.log("HERE", exerciseToUpdate)
+
+    //check pre existing images
+    if (exerciseToUpdate.image) {
+        let array = exerciseToUpdate.image.split('/');
+        let fileName = array[array.length-1];
+        const [public_id] = fileName.split('.');
+        await cloudinary.uploader.destroy(public_id);
+    }
+
+    const { tempFilePath } = req.files.image;
+    const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+    exerciseToUpdate.image = secure_url;
+    await exerciseToUpdate.save();
+    try {
+        return res.status(201).json(exerciseToUpdate);
+    } catch (error) {
+        return res.status(500).json({message: "Couldn't create the coffee"})
+    }
+});
 
 //edit one exercise
 router.put("/exercise/:id", async (req,res) => {
