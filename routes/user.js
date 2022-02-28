@@ -47,7 +47,7 @@ router.get("/user/:id", async (req, res) => {
         return res.status(200).json(user)
     }
     catch (error) {
-        return res.status(500).json({message: "Couldn't get the coffee"})
+        return res.status(500).json({message: "Couldn't get the user"})
     }
 })
 
